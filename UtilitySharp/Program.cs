@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Events;
@@ -25,6 +26,8 @@ namespace UtilitySharp
 
             Chat.Print("<b>Utility PRO<font color=\"#FFFFFF\">#</font> loaded.</font></b>");
             LoadEvents();
+            new GankAlerter.GankAlerter(mainMenu);
+            new WardTracker.WardTracker().InitializeComponent(mainMenu);
         }
 
         private static void LoadEvents()
@@ -33,6 +36,36 @@ namespace UtilitySharp
             Drawing.OnDraw += Drawing_OnDraw;
             Orbwalker.OnPostAttack += Orbwalker_OnPostAttack;
             Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffGain;
+
+            #region Clown&Juke
+
+            Game.OnTick += OnTick;
+            GameObject.OnCreate += OnCreate;
+            Obj_AI_Base.OnProcessSpellCast += OnProcessSpellCast;
+            Drawing.OnEndScene += OnDraw;
+
+            #endregion
+
+        }
+
+        private static void OnTick(EventArgs args)
+        {
+           _activator?.OnTick(args);
+        }
+
+        private static void OnCreate(GameObject sender, EventArgs args)
+        {
+            _activator?.OnCreate(sender ,args);
+        }
+
+        private static void OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        {
+            _activator?.OnProcessSpellCast(sender, args);
+        }
+
+        private static void OnDraw(EventArgs args)
+        {
+            _activator?.OnDraw(args);
         }
 
         private static void Obj_AI_Base_OnBuffGain(Obj_AI_Base sender, Obj_AI_BaseBuffGainEventArgs args)
@@ -52,8 +85,7 @@ namespace UtilitySharp
 
         private static Activator _activator;
         private static void Game_OnUpdate(System.EventArgs args)
-        {
-            //ACTIVATOR
+        {               
             if (EnableActivator.CurrentValue)
             {
                 if (_activator == null)

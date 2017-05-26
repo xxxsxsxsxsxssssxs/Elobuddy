@@ -41,6 +41,9 @@
     <Reference Include="SharpDX">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\EloBuddy\System\SharpDX.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX.Direct3D9">
+      <HintPath>..\..\LİKODBUDİ\EloBuddy\System\SharpDX.Direct3D9.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -56,9 +59,38 @@
     <Compile Include="Activator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlueTrinket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ControlWard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ControlWard_Enemy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ControlWard_Friendly.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YellowTrinket_Enemy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\YellowTrinket_Friendly.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
