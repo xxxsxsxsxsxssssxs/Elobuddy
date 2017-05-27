@@ -33,7 +33,7 @@ namespace GankAlerter
 
             Enable = menu.Add("enable", new CheckBox("Enable Gang alerter"));
 
-            Value = menu.Add("value", new Slider("Distance to draw", 1000, 600, 1200));
+            Value = menu.Add("value", new Slider("Distance to draw", 2000, 600, 3000));
 
             foreach (var obj in EntityManager.Heroes.Enemies)
             {
@@ -49,7 +49,7 @@ namespace GankAlerter
             {
                 //Console.WriteLine(menu["draw" + obj.BaseSkinName].Cast<CheckBox>().CurrentValue);      
                 if (obj != null && Enable.CurrentValue && menu["draw" + obj.BaseSkinName].Cast<CheckBox>().CurrentValue &&
-                    obj.IsValidTarget(Value.CurrentValue) && Player.Instance.CountAllyChampionsInRange(Value.CurrentValue) < 2  && Player.Instance.Distance(obj) > Value.CurrentValue - Value.CurrentValue / 2)
+                    obj.IsValidTarget(Value.CurrentValue) && Player.Instance.CountAllyChampionsInRange(Value.CurrentValue) < 2  && Player.Instance.Distance(obj) > 800)
                 {
                     Drawing.DrawLine(Player.Instance.Position.WorldToScreen(), obj.Position.WorldToScreen(), 10, Color.Azure);
                     Drawing.DrawText(Player.Instance.Position.WorldToScreen().Extend(obj,15), Color.Red, string.Format("WARNING {0} incoming !", obj.BaseSkinName), 65);
