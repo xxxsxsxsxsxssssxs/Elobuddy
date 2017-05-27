@@ -1749,7 +1749,7 @@ namespace UtilitySharp
             //ITEMS
 
             if (Zhonyas.IsOwned() && Zhonyas.IsReady() && ZhonyasEnabled.CurrentValue &&
-                Hero.HealthPercent <= ZhonyasValue.CurrentValue && !Hero.IsInShopRange())
+                Hero.HealthPercent <= ZhonyasValue.CurrentValue && !Hero.IsInShopRange() && Player.Instance.CountEnemyChampionsInRange(600) >= 1)
             {
                 Zhonyas.Cast();
             }
