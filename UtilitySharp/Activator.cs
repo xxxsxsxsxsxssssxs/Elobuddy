@@ -2077,6 +2077,7 @@ namespace UtilitySharp
 
                     if (target != null && target.IsValidTarget())
                     {
+                        Console.WriteLine(Player.Instance.Level);
                         Console.WriteLine(GetCustomIgniteDamage());
                         if (target.TotalShieldHealth() < GetCustomIgniteDamage())
                         {
