@@ -1577,7 +1577,7 @@ namespace UtilitySharp
         {
             switch (Player.Instance.Level)
             {
-                case 0:
+                case 1:
                 {
                     return 70;
                 }
