@@ -65,7 +65,8 @@ namespace Sexsimiko7AIO.Yasuo
                     }
                 }
                 // gapE + Qstack
-                if (ObjectManager.Player.Position.CountEnemyChampionsInRange(YasuoHelper.YasuoGetQRange()) == 0)
+                 var getenemy = TargetSelector.GetTarget(YasuoHelper.YasuoGetQRange(), DamageType.Physical);
+                if (ObjectManager.Player.Position.Distance(getenemy) > YasuoConfig.E.Range || ObjectManager.Player.Position.Distance(getenemy) > YasuoHelper.YasuoGetQRange())
                 {
                     YasuoHelper.YasuoCastEMouse(underturret);
                 }
