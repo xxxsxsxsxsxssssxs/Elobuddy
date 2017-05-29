@@ -43,10 +43,7 @@ namespace Sexsimiko7AIO.Yasuo
                     else
                     {
                         var target = TargetSelector.GetTarget(YasuoHelper.YasuoGetQRange(), DamageType.Physical);
-                        if (YasuoHelper.YasuoCastEOnUnit(target, underturret))
-                        {
-                            Core.DelayAction(() => Player.CastSpell(SpellSlot.Q), 100);
-                        }
+                        YasuoHelper.YasuoCastQCircle(target);
                     }
                 }
                 if (YasuoHelper.YasuoQStage() != 3 && YasuoHelper.YasuoNotDashing())
