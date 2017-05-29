@@ -195,7 +195,7 @@ namespace Sexsimiko7AIO.Yasuo
             {
                 if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee))
                     return;
-                if (YasuoConfig.YasuoAutoQUnderTurret.CurrentValue || !Player.Instance.Position.IsUnderTurret(true))
+                if (YasuoConfig.YasuoAutoQUnderTurret.CurrentValue || !Player.Instance.Position.IsUnderTurret())
                 {
                     if (YasuoHelper.YasuoQStage() != 3 && YasuoConfig.YasuoAutoQ.CurrentValue)
                     {

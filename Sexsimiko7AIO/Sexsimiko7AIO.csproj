@@ -41,8 +41,12 @@
     <Reference Include="SharpDX">
       <HintPath>D:\EloBuddy\System\SharpDX.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX.Direct3D9">
+      <HintPath>D:\EloBuddy\System\SharpDX.Direct3D9.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +58,25 @@
     <Compile Include="MinionManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Yasuo\EEvader.cs" />
+    <Compile Include="Yasuo\EvadePlus\AutoPathing.cs" />
+    <Compile Include="Yasuo\EvadePlus\EvadeMenu.cs" />
+    <Compile Include="Yasuo\EvadePlus\EvadePlus.cs" />
+    <Compile Include="Yasuo\EvadePlus\EvadeSkillshot.cs" />
+    <Compile Include="Yasuo\EvadePlus\EvadeSpellManager.cs" />
+    <Compile Include="Yasuo\EvadePlus\PathFinding.cs" />
+    <Compile Include="Yasuo\EvadePlus\Program.cs" />
+    <Compile Include="Yasuo\EvadePlus\SkillshotDatabase.cs" />
+    <Compile Include="Yasuo\EvadePlus\SkillshotDetector.cs" />
+    <Compile Include="Yasuo\EvadePlus\SkillshotTypes\CircularMissileSkillshot.cs" />
+    <Compile Include="Yasuo\EvadePlus\SkillshotTypes\LinearMissileSkillshot.cs" />
+    <Compile Include="Yasuo\EvadePlus\SkillshotTypes\SpecialTypes\SummonerMark.cs" />
+    <Compile Include="Yasuo\EvadePlus\SkillshotTypes\SpecialTypes\YasuoQ.cs" />
+    <Compile Include="Yasuo\EvadePlus\SpellData.cs" />
+    <Compile Include="Yasuo\EvadePlus\Utils.cs" />
+    <Compile Include="Yasuo\TargetedSpells\SpellDetectorWindwaller.cs" />
+    <Compile Include="Yasuo\TargetedSpells\TargetedSpells.cs" />
+    <Compile Include="Yasuo\TargetedSpells\TargetSpellData.cs" />
     <Compile Include="Yasuo\YasuoConfig.cs" />
     <Compile Include="Yasuo\YasuoHelper.cs" />
     <Compile Include="Yasuo\YasuoLoad.cs" />

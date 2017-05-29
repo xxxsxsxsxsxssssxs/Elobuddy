@@ -31,9 +31,11 @@ namespace Sexsimiko7AIO.Yasuo
             YasuoAutoQ,
             YasuoAutoQ3,
             YasuoAutoQUnderTurret,
-            YasuoFleeStackQ;
+            YasuoFleeStackQ,
+            EvadeE,
+            EvadeW;
 
-        public static Slider YasuoComboRHits;
+        public static Slider YasuoComboRHits, EvadeWDelay;
 
         public static ComboBox YasuoComboEMode;
 
@@ -78,8 +80,16 @@ namespace Sexsimiko7AIO.Yasuo
             YasuoAutoQ3 = autoMenu.Add("YasuoAutoQ3", new CheckBox("Q3 "));
             YasuoAutoQUnderTurret = autoMenu.Add("YasuoAutoQUnderTurret", new CheckBox("Under Turret", false));
 
-            var fleeMenu = mainMenu.AddSubMenu("Flee Settings");
+            var fleeMenu = mainMenu.AddSubMenu("Flee/Evade Settings");
             YasuoFleeStackQ = fleeMenu.Add("YasuoFleeStackQ", new CheckBox("Stack Q"));
+            fleeMenu.AddLabel("Evade Settings");
+            fleeMenu.AddSeparator();
+            EvadeE = fleeMenu.Add("EvadeE", new CheckBox("Use E to Evade"));
+            EvadeW = fleeMenu.Add("EvadeW", new CheckBox("Use W to Evade"));
+            EvadeWDelay = fleeMenu.Add("EvadeWDelay", new Slider("Humanizer Delay (ms)", 0, 0, 1000));
+
+            EvadePlus.Program.Eevade();
+            EEvader.Init();
         }
     }
 }
