@@ -85,7 +85,7 @@ namespace Sexsimiko7AIO.Yasuo
                 {
                     YasuoHelper.YasuoCastEMouse(underturret);
                 }
-                if (YasuoConfig.YasuoComboStackQ.CurrentValue)
+                if (YasuoConfig.YasuoComboStackQ.CurrentValue && YasuoHelper.YasuoQStage() != 3)
                 {
                     YasuoHelper.YasuoStackQ();
                 }
