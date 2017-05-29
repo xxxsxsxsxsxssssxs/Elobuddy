@@ -154,9 +154,9 @@ namespace Sexsimiko7AIO.Yasuo
                 if (YasuoConfig.YasuoLaneClearE.CurrentValue)
                 {
                     var minions = EntityManager.MinionsAndMonsters.EnemyMinions
-                        .Where(x => x.IsEnemy && x.IsValidTarget());
+                        .Where(x => x.IsEnemy && x.IsValidTarget(YasuoConfig.E.Range));
                     foreach (var minion in minions)
-                    {
+                    {              
                         if (YasuoHelper.YasuoGetEDamage(minion) > minion.Health)
                         {
                             YasuoHelper.YasuoCastEOnUnit(minion, underturret);
@@ -195,7 +195,7 @@ namespace Sexsimiko7AIO.Yasuo
             {
                 if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee))
                     return;
-                if (YasuoConfig.YasuoAutoQUnderTurret.CurrentValue || !Player.Instance.Position.IsUnderTurret())
+                if (YasuoConfig.YasuoAutoQUnderTurret.CurrentValue || !Player.Instance.Position.IsUnderTurret(true))
                 {
                     if (YasuoHelper.YasuoQStage() != 3 && YasuoConfig.YasuoAutoQ.CurrentValue)
                     {

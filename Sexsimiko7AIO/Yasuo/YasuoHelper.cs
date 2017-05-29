@@ -47,7 +47,7 @@ namespace Sexsimiko7AIO.Yasuo
                return false;
            if (YasuoQStage() == 3)
            {
-               return YasuoConfig.Q2.CastMinimumHitchance(target, HitChance.High);
+               return YasuoConfig.Q2.CastMinimumHitchance(target, 60);
            }
            return YasuoConfig.Q.Cast(target);
        }
@@ -61,7 +61,7 @@ namespace Sexsimiko7AIO.Yasuo
             {
                 if (YasuoQStage() == 3)
                 {
-                    if (YasuoConfig.Q2.CastMinimumHitchance(target, 90)) return true;
+                    if (YasuoConfig.Q2.CastMinimumHitchance(target, 60)) return true;
                 }
                 if (YasuoConfig.Q.Cast(target)) return true;
             }
@@ -114,7 +114,7 @@ namespace Sexsimiko7AIO.Yasuo
                 float range = ObjectManager.Player.AttackRange + ObjectManager.Player.BoundingRadius + target.BoundingRadius;
                 var etargets = Underturret
                     ? YasuoAllETargets()
-                    : YasuoAllETargets().Where(x => !YasuoGetDashEnd(x).IsUnderTurret())
+                    : YasuoAllETargets().Where(x => !YasuoGetDashEnd(x).IsUnderTurret(true))
                         .Where(i => Prediction.Position.PredictUnitPosition(target, 450).Distance(YasuoGetDashEnd(i)) <=
                                     range || target.Distance(YasuoGetDashEnd(i)) <= range).ToList();
                 if (etargets.Any())
@@ -134,7 +134,7 @@ namespace Sexsimiko7AIO.Yasuo
                 float range = ObjectManager.Player.AttackRange + ObjectManager.Player.BoundingRadius + target.BoundingRadius;
                 var etargets = Underturret
                     ? YasuoAllETargets()
-                    : YasuoAllETargets().Where(i => !YasuoGetDashEnd(i).IsUnderTurret())
+                    : YasuoAllETargets().Where(i => !YasuoGetDashEnd(i).IsUnderTurret(true))
                         .Where(i2 => Prediction.Position.PredictUnitPosition(target, 450)
                                          .Distance(YasuoGetDashEnd(i2)) <= range ||
                                      target.Distance(YasuoGetDashEnd(i2)) <= range);
@@ -153,7 +153,7 @@ namespace Sexsimiko7AIO.Yasuo
                 return;
             var etargets = Underturret
                 ? YasuoAllETargets()
-                : YasuoAllETargets().Where(i => !YasuoGetDashEnd(i).IsUnderTurret())
+                : YasuoAllETargets().Where(i => !YasuoGetDashEnd(i).IsUnderTurret(true))
                     .Where(i2 => YasuoGetDashEnd(i2).Distance(Game.CursorPos) <
                                  ObjectManager.Player.Distance(Game.CursorPos - 100));
             var objAiBases = etargets as IList<Obj_AI_Base> ?? etargets.ToList();
@@ -180,7 +180,7 @@ namespace Sexsimiko7AIO.Yasuo
 
         public static bool YasuoCastEOnUnit(Obj_AI_Base target, bool Underturret)
         {
-            if (!YasuoGetDashEnd(target).IsUnderTurret() || Underturret)
+            if (!YasuoGetDashEnd(target).IsUnderTurret(true) || Underturret)
             {
                 YasuoConfig.E.Cast(target);
                 return true;
