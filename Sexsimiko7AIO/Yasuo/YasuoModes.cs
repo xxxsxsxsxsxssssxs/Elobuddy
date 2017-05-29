@@ -31,7 +31,24 @@ namespace Sexsimiko7AIO.Yasuo
                 }
                 if (!YasuoHelper.IsADCanCastSpell())
                     return;
+
+                bool underturret = YasuoConfig.YasuoComboEUnderTurret.CurrentValue;
                 // Q
+                if (YasuoHelper.YasuoQStage() == 3)
+                {
+                    if (YasuoHelper.YasuoNotDashing())
+                    {
+                        YasuoHelper.YasuoCastQ();
+                    }
+                    else
+                    {
+                        var target = TargetSelector.GetTarget(YasuoHelper.YasuoGetQRange(), DamageType.Physical);
+                        if (YasuoHelper.YasuoCastEOnUnit(target, underturret))
+                        {
+                            Core.DelayAction(() => Player.CastSpell(SpellSlot.Q), 100);
+                        }
+                    }
+                }
                 if (YasuoHelper.YasuoQStage() != 3 && YasuoHelper.YasuoNotDashing())
                 {
                     YasuoHelper.YasuoCastQ();
@@ -44,12 +61,11 @@ namespace Sexsimiko7AIO.Yasuo
                         YasuoHelper.YasuoCastQ(target);
                     }
                     foreach (var hero in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(100000)))
-                    {
+                    { 
                         YasuoHelper.YasuoCastQCircle(hero);
                     }
                 }
                 // E
-                bool underturret = YasuoConfig.YasuoComboEUnderTurret.CurrentValue;
                 {
                     switch (YasuoConfig.YasuoComboEMode.CurrentValue)
                     {
@@ -64,7 +80,7 @@ namespace Sexsimiko7AIO.Yasuo
                             break;
                     }
                 }
-                // gapE + Qstack                
+                // gapE + Qstack
                 if (ObjectManager.Player.Position.CountEnemyChampionsInRange(YasuoHelper.YasuoGetQRange()) == 0 || ObjectManager.Player.Position.CountEnemyChampionsInRange(YasuoConfig.E.Range) == 0)
                 {
                     YasuoHelper.YasuoCastEMouse(underturret);
@@ -84,7 +100,7 @@ namespace Sexsimiko7AIO.Yasuo
                 {
                     YasuoHelper.YasuoCastQ();
                 }
-                else if (YasuoHelper.YasuoQStage() != 3 && YasuoHelper.YasuoNotDashing() && YasuoConfig.YasuoHarassQ3.CurrentValue)
+                else if (YasuoHelper.YasuoQStage() == 3 && YasuoHelper.YasuoNotDashing() && YasuoConfig.YasuoHarassQ3.CurrentValue)
                 {
                     var target = TargetSelector.GetTarget(YasuoConfig.Q2.Range, DamageType.Physical);
                     if (target.IsValidTarget())
@@ -118,7 +134,11 @@ namespace Sexsimiko7AIO.Yasuo
                 if (YasuoConfig.YasuoLaneClearQ.CurrentValue && YasuoConfig.YasuoLaneClearE.CurrentValue && YasuoConfig.E.IsReady() && YasuoConfig.Q.IsReady())
                 {
                     var minions = EntityManager.MinionsAndMonsters.EnemyMinions
-                        .Where(x => x.IsEnemy && x.IsValidTarget());
+                        .Where(x => x.IsValidTarget());
+                    if (!minions.Any())
+                    {
+                        return;
+                    }
                     foreach (var minion in minions)
                     {
                         if (YasuoHelper.YasuoGetDashEnd(minion).CountEnemyMinionsInRange(250) >= 3 && YasuoHelper.YasuoGetDashEnd(minion).CountEnemyChampionsInRange(450) == 0)

@@ -16,6 +16,15 @@ namespace Sexsimiko7AIO
             {
                 new Yasuo.YasuoLoad();
             }
+            else if (Player.Instance.Hero == Champion.Lucian)
+            {
+                
+            }
+            else
+            {
+                Chat.Print("CHAMPION NOT SUPPORTED");
+                Chat.Print("<b>Supported Champions: Yasuo, Lucian.</b>");
+            }
         }
     }
 }
