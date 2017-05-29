@@ -64,9 +64,8 @@ namespace Sexsimiko7AIO.Yasuo
                             break;
                     }
                 }
-                // gapE + Qstack
-                 var getenemy = TargetSelector.GetTarget(YasuoHelper.YasuoGetQRange(), DamageType.Physical);
-                if (ObjectManager.Player.Position.Distance(getenemy) > YasuoConfig.E.Range || ObjectManager.Player.Position.Distance(getenemy) > YasuoHelper.YasuoGetQRange())
+                // gapE + Qstack                
+                if (ObjectManager.Player.Position.CountEnemyChampionsInRange(YasuoHelper.YasuoGetQRange()) == 0 || ObjectManager.Player.Position.CountEnemyChampionsInRange(YasuoConfig.E.Range) == 0)
                 {
                     YasuoHelper.YasuoCastEMouse(underturret);
                 }
