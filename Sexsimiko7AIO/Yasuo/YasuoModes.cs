@@ -65,7 +65,7 @@ namespace Sexsimiko7AIO.Yasuo
                     }
                 }
                 // gapE + Qstack
-                if (ObjectManager.Player.Position.CountEnemyChampionsInRange(YasuoConfig.E.Range) == 0)
+                if (ObjectManager.Player.Position.CountEnemyChampionsInRange(YasuoHelper.YasuoGetQRange()) == 0)
                 {
                     YasuoHelper.YasuoCastEMouse(underturret);
                 }
