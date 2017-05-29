@@ -80,11 +80,7 @@ namespace Sexsimiko7AIO.Yasuo
                             break;
                     }
                 }
-                // gapE + Qstack
-                if (ObjectManager.Player.Position.CountEnemyChampionsInRange(YasuoHelper.YasuoGetQRange()) == 0 || ObjectManager.Player.Position.CountEnemyChampionsInRange(YasuoConfig.E.Range) == 0)
-                {
-                    YasuoHelper.YasuoCastEMouse(underturret);
-                }
+                //Qstack
                 if (YasuoConfig.YasuoComboStackQ.CurrentValue && YasuoHelper.YasuoQStage() != 3)
                 {
                     YasuoHelper.YasuoStackQ();

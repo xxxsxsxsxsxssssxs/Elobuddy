@@ -47,7 +47,7 @@ namespace Sexsimiko7AIO.Yasuo
                return false;
            if (YasuoQStage() == 3)
            {
-               return YasuoConfig.Q2.CastMinimumHitchance(target, 60);
+               return YasuoConfig.Q2.CastMinimumHitchance(target, HitChance.High);
            }
            return YasuoConfig.Q.Cast(target);
        }
@@ -61,7 +61,7 @@ namespace Sexsimiko7AIO.Yasuo
             {
                 if (YasuoQStage() == 3)
                 {
-                    if (YasuoConfig.Q2.CastMinimumHitchance(target, 60)) return true;
+                    if (YasuoConfig.Q2.CastMinimumHitchance(target, HitChance.High)) return true;
                 }
                 if (YasuoConfig.Q.Cast(target)) return true;
             }
