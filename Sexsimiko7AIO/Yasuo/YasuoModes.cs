@@ -116,11 +116,11 @@ namespace Sexsimiko7AIO.Yasuo
                 var Minions = EntityManager.MinionsAndMonsters.EnemyMinions.Where(i => i.IsValidTarget(YasuoConfig.E.Range));
                 foreach (var minion in Minions)
                 {
-                    if (YasuoConfig.YasuoLastHitQ.CurrentValue && ObjectManager.Player.GetSpellDamage(minion, SpellSlot.Q) > minion.Health)
+                    if (YasuoConfig.YasuoLastHitQ.CurrentValue && YasuoConfig.Q.IsReady() && ObjectManager.Player.GetSpellDamage(minion, SpellSlot.Q) > minion.Health)
                     {
                         YasuoHelper.YasuoCastQ(minion);
                     }
-                    if (YasuoConfig.YasuoLastHitE.CurrentValue && YasuoHelper.YasuoGetEDamage(minion) > minion.Health)
+                    if (YasuoConfig.YasuoLastHitE.CurrentValue && YasuoConfig.E.IsReady() && YasuoHelper.YasuoGetEDamage(minion) > minion.Health)
                     {
                         YasuoHelper.YasuoCastEOnUnit(minion, underturret);
                     }
@@ -151,7 +151,7 @@ namespace Sexsimiko7AIO.Yasuo
                     }
 
                 }
-                if (YasuoConfig.YasuoLaneClearQ.CurrentValue)
+                if (YasuoConfig.YasuoLaneClearQ.CurrentValue && YasuoConfig.Q.IsReady())
                 {
                     var minions = EntityManager.MinionsAndMonsters.EnemyMinions.Where(x => x.IsValidTarget(YasuoHelper.YasuoGetQRange()));
                     var objAiMinions = minions as IList<Obj_AI_Minion> ?? minions.ToList();
@@ -171,7 +171,7 @@ namespace Sexsimiko7AIO.Yasuo
                         }
                     }
                 }
-                if (YasuoConfig.YasuoLaneClearE.CurrentValue)
+                if (YasuoConfig.YasuoLaneClearE.CurrentValue && YasuoConfig.E.IsReady())
                 {
                     var minions = EntityManager.MinionsAndMonsters.EnemyMinions
                         .Where(x => x.IsEnemy && x.IsValidTarget(YasuoConfig.E.Range));
