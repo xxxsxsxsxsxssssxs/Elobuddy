@@ -74,7 +74,7 @@ namespace Sexsimiko7AIO.Yasuo
                 return false;
             var pred = Prediction.Position.PredictUnitPosition(target,
                 (YasuoVariables.YasuoDashData.EndTick - Environment.TickCount - Game.Ping) / 1000);
-            if (pred.Distance(YasuoVariables.YasuoDashData.EndPos) <= 150 + target.BoundingRadius)
+            if (pred.Distance(YasuoVariables.YasuoDashData.EndPos) <= 100 + target.BoundingRadius)
             {
                 return YasuoConfig.Q.Cast(target);
             }
@@ -89,8 +89,8 @@ namespace Sexsimiko7AIO.Yasuo
         public static List<Obj_AI_Base> YasuoAllETargets(bool checkbuff = true)
         {
             var targets = new List<Obj_AI_Base>();
-            targets.AddRange(EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(YasuoConfig.E.Range)));
-            targets.AddRange(EntityManager.MinionsAndMonsters.Minions.Where(x => x.IsEnemy && !x.IsWard() && x.IsValidTarget(YasuoConfig.E.Range) && !x.Name.Contains("barrel")));
+            targets.AddRange(EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(YasuoConfig.E.Range) && !x.IsDead));
+            targets.AddRange(EntityManager.MinionsAndMonsters.Minions.Where(x => x.IsEnemy && !x.IsDead && !x.IsWard() && x.IsValidTarget(YasuoConfig.E.Range) && !x.Name.Contains("barrel")));
             if (checkbuff)
             {
                 targets.RemoveAll(x => x.HasBuff("YasuoDashWrapper"));
@@ -114,7 +114,7 @@ namespace Sexsimiko7AIO.Yasuo
                 float range = ObjectManager.Player.AttackRange + ObjectManager.Player.BoundingRadius + target.BoundingRadius;
                 var etargets = Underturret
                     ? YasuoAllETargets()
-                    : YasuoAllETargets().Where(x => !YasuoGetDashEnd(x).IsUnderTurret(true))
+                    : YasuoAllETargets().Where(x => !YasuoGetDashEnd(x).IsUnderTurret(true) && !x.IsDead)
                         .Where(i => Prediction.Position.PredictUnitPosition(target, 450).Distance(YasuoGetDashEnd(i)) <=
                                     range || target.Distance(YasuoGetDashEnd(i)) <= range).ToList();
                 if (etargets.Any())
@@ -129,12 +129,12 @@ namespace Sexsimiko7AIO.Yasuo
         {
             if (!IsADCanCastSpell())
                 return;
-            foreach (var target in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(10000)))
+            foreach (var target in EntityManager.Heroes.Enemies.Where(x => x.IsValidTarget(10000) && !x.IsDead))
             {
                 float range = ObjectManager.Player.AttackRange + ObjectManager.Player.BoundingRadius + target.BoundingRadius;
                 var etargets = Underturret
                     ? YasuoAllETargets()
-                    : YasuoAllETargets().Where(i => !YasuoGetDashEnd(i).IsUnderTurret(true))
+                    : YasuoAllETargets().Where(i => !YasuoGetDashEnd(i).IsUnderTurret(true) && !i.IsDead)
                         .Where(i2 => Prediction.Position.PredictUnitPosition(target, 450)
                                          .Distance(YasuoGetDashEnd(i2)) <= range ||
                                      target.Distance(YasuoGetDashEnd(i2)) <= range);
@@ -153,7 +153,7 @@ namespace Sexsimiko7AIO.Yasuo
                 return;
             var etargets = Underturret
                 ? YasuoAllETargets()
-                : YasuoAllETargets().Where(i => !YasuoGetDashEnd(i).IsUnderTurret(true))
+                : YasuoAllETargets().Where(i => !YasuoGetDashEnd(i).IsUnderTurret(true) && !i.IsDead)
                     .Where(i2 => YasuoGetDashEnd(i2).Distance(Game.CursorPos) <
                                  ObjectManager.Player.Distance(Game.CursorPos - 100));
             var objAiBases = etargets as IList<Obj_AI_Base> ?? etargets.ToList();
@@ -168,7 +168,7 @@ namespace Sexsimiko7AIO.Yasuo
         public static void YasuoCastEFlee()
         {
             var etargets = YasuoAllETargets().Where(i2 => YasuoGetDashEnd(i2).Distance(Game.CursorPos) <
-                                                          ObjectManager.Player.Distance(Game.CursorPos - 100));
+                                                          ObjectManager.Player.Distance(Game.CursorPos - 100) && !i2.IsDead);
             var objAiBases = etargets as IList<Obj_AI_Base> ?? etargets.ToList();
             var aiBases = objAiBases.OrderBy(i => YasuoGetDashEnd(i).Distance(Game.CursorPos));
             if (aiBases.Any())
