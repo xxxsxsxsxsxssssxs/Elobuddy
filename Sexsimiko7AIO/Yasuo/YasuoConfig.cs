@@ -35,7 +35,7 @@ namespace Sexsimiko7AIO.Yasuo
             EvadeE,
             EvadeW;
 
-        public static Slider YasuoComboRHits, EvadeWDelay;
+        public static Slider YasuoComboRHits, EvadeWDelay, YasuoComboQPercent;
 
         public static ComboBox YasuoComboEMode;
 
@@ -49,6 +49,9 @@ namespace Sexsimiko7AIO.Yasuo
             var mainMenu = MainMenu.AddMenu("Sexsimiko7AIO Yasuo", "sexsimiko7aioyasuo");
             var comboMenu = mainMenu.AddSubMenu("Combo Settings");
             YasuoComboStackQ = comboMenu.Add("YasuoComboStackQ", new CheckBox("Stack Q"));
+            comboMenu.AddSeparator();
+            YasuoComboQPercent = comboMenu.Add("YasuoComboQPercent", new Slider("Q Hitchange Percent %{0}", 60));
+            comboMenu.AddSeparator();
             YasuoComboEMode = comboMenu.Add("YasuoComboEMode", new ComboBox("E Mode", 0, "Fly", "Stick", "Mouse"));
             YasuoComboEUnderTurret = comboMenu.Add("YasuoComboEUnderTurret", new CheckBox("E Under Turret"));
             YasuoComboR = comboMenu.Add("YasuoComboR", new CheckBox("R"));
