@@ -129,7 +129,7 @@ namespace Sexsimiko7AIO.Lucian
 
         private static void Obj_AI_Base_OnSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Combo && args.IsAutoAttack() && sender.IsMe && args.Target is AIHeroClient)
+            if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Combo && sender.IsMe && args.Target is AIHeroClient)
             {
                 var target = (AIHeroClient) args.Target;
                 if (CastE(target))
