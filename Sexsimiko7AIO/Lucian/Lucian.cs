@@ -132,6 +132,9 @@ namespace Sexsimiko7AIO.Lucian
             if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Combo && sender.IsMe && args.Target is AIHeroClient)
             {
                 var target = (AIHeroClient) args.Target;
+
+                if (target == null) return;
+
                 if (CastE(target))
                 {
                     Orbwalker.ResetAutoAttack();
