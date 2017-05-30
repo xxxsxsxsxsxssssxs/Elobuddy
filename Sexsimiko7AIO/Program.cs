@@ -12,18 +12,14 @@ namespace Sexsimiko7AIO
 
         private static void Loading_OnLoadingComplete(System.EventArgs args)
         {
-            if (Player.Instance.Hero == Champion.Yasuo)
+            if (Player.Instance.Hero == Champion.Lucian)
             {
-                new Yasuo.Yasuo();
-            }
-            else if (Player.Instance.Hero == Champion.Lucian)
-            {
-                
+                new Lucian.Lucian();
             }
             else
             {
                 Chat.Print("CHAMPION NOT SUPPORTED");
-                Chat.Print("<b>Supported Champions: Yasuo, Lucian.</b>");
+                Chat.Print("<b>Supported Champions: Lucian.</b>");
             }
         }
     }
