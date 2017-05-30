@@ -16,10 +16,14 @@ namespace Sexsimiko7AIO
             {
                 new Lucian.Lucian();
             }
+            else if (Player.Instance.Hero == Champion.Caitlyn)
+            {
+                new Caitlyn.Caitlyn();
+            }
             else
             {
                 Chat.Print("CHAMPION NOT SUPPORTED");
-                Chat.Print("<b>Supported Champions: Lucian.</b>");
+                Chat.Print("<b>Supported Champions: Lucian, Caitlyn.</b>");
             }
         }
     }

@@ -63,7 +63,7 @@ namespace Sexsimiko7AIO.Lucian
             E = new Spell.Skillshot(SpellSlot.E, 425, SkillShotType.Linear, 250, 1000, 425);
             R = new Spell.Skillshot(SpellSlot.R, 1200, SkillShotType.Linear, 50, 2800, 110);
 
-            var main = MainMenu.AddMenu("Sexsimiko7AIO Lucian", "mikolucian");
+            var main = MainMenu.AddMenu("S7AIO Lucian", "mikolucian");
 
             var comboMenu = main.AddSubMenu("++ Combo Menu");
             QInCombo = comboMenu.Add("QInCombo", new CheckBox("Use Q in Combo"));
@@ -196,7 +196,6 @@ namespace Sexsimiko7AIO.Lucian
 
                 if (Target != null && !Hero.Position.IsInRange(Target.Position, 500))
                 {
-                    var rDmg = CalcRDamage(Target);
                     var flDistance = (Hero.Position - Target.Position).Length();
 
                     if (Target.HealthPercent < RInComboPercentHP.CurrentValue && flDistance < RInComboDist.CurrentValue)
@@ -279,22 +278,6 @@ namespace Sexsimiko7AIO.Lucian
 
                 }
             }
-        }
-
-        private static float CalcRDamage(AIHeroClient Target)
-        {
-            if (Hero.Spellbook.GetSpell(SpellSlot.R).Level == 0 || Target == null || !Hero.Spellbook.GetSpell(SpellSlot.R).IsLearned)
-            {
-                return 0;
-            }
-            var InitDamage = new float[] {400, 875, 1500}[Hero.Spellbook.GetSpell(SpellSlot.R).Level - 1] +
-                             new float[] {4, 5, 6}[Hero.Spellbook.GetSpell(SpellSlot.R).Level - 1] *
-                             Hero.TotalAttackDamage +
-                             new [] {2, 2.5f, 3}[Hero.Spellbook.GetSpell(SpellSlot.R).Level - 1] *
-                             Hero.TotalMagicalDamage;
-            return Hero.CalculateDamageOnUnit(Target, DamageType.Physical, InitDamage);
-
-            // TOTAL NON-MINION DAMAGE: 400 / 875 / 1500 (+ 400 / 500 / 600% AD) (+ 200 / 250 / 300% AP) 
         }
 
         private static bool CastExtendedQ()
