@@ -1,6 +1,7 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
 using SharpDX;
+using SpellData = Sexsimiko7AIO.Yasuo.EvadePlus.SpellData;
 
 namespace Sexsimiko7AIO.Yasuo.EvadePlus
 {

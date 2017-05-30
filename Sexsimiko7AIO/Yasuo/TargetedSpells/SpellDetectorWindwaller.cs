@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
+using Sexsimiko7AIO.Yasuo.EvadePlus;
 
 namespace Sexsimiko7AIO.Yasuo.TargetedSpells
 {
@@ -15,7 +13,7 @@ namespace Sexsimiko7AIO.Yasuo.TargetedSpells
         private static Menu _targetedMenu;
         public static void Init()
         {
-            _targetedMenu = EvadePlus.EvadeMenu.MainMenu.AddSubMenu("Targeted Skills");
+            _targetedMenu = EvadeMenu.MainMenu.AddSubMenu("Targeted Skills");
             _targetedMenu.AddGroupLabel("Targeted Skills");
             foreach (var enemy in EntityManager.Heroes.Enemies)
             {

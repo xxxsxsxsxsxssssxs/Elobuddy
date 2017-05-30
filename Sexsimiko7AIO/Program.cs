@@ -14,7 +14,7 @@ namespace Sexsimiko7AIO
         {
             if (Player.Instance.Hero == Champion.Yasuo)
             {
-                new Yasuo.YasuoLoad();
+                new Yasuo.Yasuo();
             }
             else if (Player.Instance.Hero == Champion.Lucian)
             {

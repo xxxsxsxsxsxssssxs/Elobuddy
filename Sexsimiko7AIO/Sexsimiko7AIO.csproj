@@ -56,9 +56,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lucian\Lucian.cs" />
-    <Compile Include="MinionManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Yasuo\ColourMenuItem.cs" />
+    <Compile Include="Yasuo\DamageHandler.cs" />
+    <Compile Include="Yasuo\DashingManager.cs" />
     <Compile Include="Yasuo\EEvader.cs" />
     <Compile Include="Yasuo\EvadePlus\AutoPathing.cs" />
     <Compile Include="Yasuo\EvadePlus\EvadeMenu.cs" />
@@ -75,14 +77,14 @@
     <Compile Include="Yasuo\EvadePlus\SkillshotTypes\SpecialTypes\YasuoQ.cs" />
     <Compile Include="Yasuo\EvadePlus\SpellData.cs" />
     <Compile Include="Yasuo\EvadePlus\Utils.cs" />
+    <Compile Include="Yasuo\EventManager.cs" />
+    <Compile Include="Yasuo\Extentions.cs" />
+    <Compile Include="Yasuo\SpellManager.cs" />
+    <Compile Include="Yasuo\StateManager.cs" />
     <Compile Include="Yasuo\TargetedSpells\SpellDetectorWindwaller.cs" />
     <Compile Include="Yasuo\TargetedSpells\TargetedSpells.cs" />
     <Compile Include="Yasuo\TargetedSpells\TargetSpellData.cs" />
-    <Compile Include="Yasuo\YasuoConfig.cs" />
-    <Compile Include="Yasuo\YasuoHelper.cs" />
-    <Compile Include="Yasuo\YasuoLoad.cs" />
-    <Compile Include="Yasuo\YasuoModes.cs" />
-    <Compile Include="Yasuo\YasuoVariables.cs" />
+    <Compile Include="Yasuo\Yasuo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

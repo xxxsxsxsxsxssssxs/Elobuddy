@@ -1,19 +1,16 @@
-﻿
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
-using Sexsimiko7AIO.Yasuo.EvadePlus;
 using SharpDX;
 
-namespace EvadePlus
+namespace Sexsimiko7AIO.Yasuo.EvadePlus
 {
     public class PathFinding
     {
-        public Sexsimiko7AIO.Yasuo.EvadePlus.EvadePlus Evade;
+        public EvadePlus Evade;
 
-        public PathFinding(Sexsimiko7AIO.Yasuo.EvadePlus.EvadePlus evade)
+        public PathFinding(EvadePlus evade)
         {
             Evade = evade;
         }
@@ -108,7 +105,7 @@ namespace EvadePlus
 
                     detailedPolygon = pol1.ToDetailedPolygon();
                     var index = detailedPolygon.Points.FindIndex(p => p == current);
-                    var linkedList = new Sexsimiko7AIO.Yasuo.EvadePlus.LinkedList<Vector2>(detailedPolygon.Points, index);
+                    var linkedList = new LinkedList<Vector2>(detailedPolygon.Points, index);
 
                     var nextPath = new List<Vector2>();
                     var previousPath = new List<Vector2>();
@@ -121,7 +118,7 @@ namespace EvadePlus
                     {
                         var c = linkedList.Next();
 
-                        if (IsWall(c))
+                        if (c.IsWall())
                         {
                             nextWall = true;
                             break;
@@ -141,7 +138,7 @@ namespace EvadePlus
                     {
                         var c = linkedList.Previous();
 
-                        if (IsWall(c))
+                        if (c.IsWall())
                         {
                             previousWall = true;
                             break;
@@ -176,11 +173,6 @@ namespace EvadePlus
             }
 
             return path.ToArray();
-        }
-
-        public static bool IsWall(Vector2 vector)
-        {
-            return NavMesh.GetCollisionFlags(vector.X, vector.Y).HasFlag(CollisionFlags.Wall);
         }
 
         public Vector2[] CleanPath(Vector2[] path)

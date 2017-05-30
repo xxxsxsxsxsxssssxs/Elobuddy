@@ -5,15 +5,16 @@ namespace Sexsimiko7AIO.Yasuo.EvadePlus
     internal static class Program
     {
         private static SkillshotDetector _skillshotDetector;
-        public static EvadePlus Evade;
+        public static Sexsimiko7AIO.Yasuo.EvadePlus.EvadePlus Evade;
 
-        public static void Eevade()
+        public static void EvadeMain()
         {
-            
+            Loading.OnLoadingComplete += delegate
+            {
                 _skillshotDetector = new SkillshotDetector();
-                Evade = new EvadePlus(_skillshotDetector);
+                Evade = new Sexsimiko7AIO.Yasuo.EvadePlus.EvadePlus(_skillshotDetector);
                 EvadeMenu.CreateMenu();
-            
+            };
 
         }
     }

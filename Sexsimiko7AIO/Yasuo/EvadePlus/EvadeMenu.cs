@@ -4,6 +4,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using Sexsimiko7AIO.Yasuo.EvadePlus.SkillshotTypes;
+using Sexsimiko7AIO.Yasuo.TargetedSpells;
 
 namespace Sexsimiko7AIO.Yasuo.EvadePlus
 {
@@ -114,7 +115,7 @@ namespace Sexsimiko7AIO.Yasuo.EvadePlus
             ControlsMenu.Add("enableEvade", new KeyBind("Enable Evade", true, KeyBind.BindTypes.PressToggle, 'M'));
             ControlsMenu.Add("dodgeOnlyDangerous", new KeyBind("Dodge Only Dangerous", false, KeyBind.BindTypes.HoldActive));
 
-            TargetedSpells.SpellDetectorWindwaller.Init();
+            SpellDetectorWindwaller.Init();
         }
 
         private static EvadeSkillshot GetSkillshot(string s)

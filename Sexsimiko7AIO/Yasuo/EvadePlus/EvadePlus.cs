@@ -192,7 +192,7 @@ namespace Sexsimiko7AIO.Yasuo.EvadePlus
         {
             Skillshots =
                 (DodgeDangerousOnly
-                    ? SkillshotDetector.ActiveSkillshots.Where(c => c.SpellData.IsDangerous && EvadeMenu.IsSkillshotE(c) && Environment.TickCount - c.TimeDetected >= YasuoConfig.EvadeWDelay.CurrentValue)
+                    ? SkillshotDetector.ActiveSkillshots.Where(c => c.SpellData.IsDangerous && EvadeMenu.IsSkillshotE(c) && Environment.TickCount - c.TimeDetected >= Yasuo.FleeMenu["Evade.WDelay"].Cast<Slider>().CurrentValue)
                     : SkillshotDetector.ActiveSkillshots).ToArray();
 
             _skillshotPolygonCache.Clear();
@@ -344,7 +344,7 @@ namespace Sexsimiko7AIO.Yasuo.EvadePlus
                 for (var i = 0; i < count; i++)
                 {
                     var point = segment[0].Extend(segment[1], i*step);
-                    if (!point.IsWall() &&
+                    if (!Utils.IsWall(point) &&
                         !Polygons.Where(pol => !pol.IsInside(playerPos))
                             .Any(pol => pol.IsIntersectingWithLineSegment(playerPos, point.Extend(playerPos, -50))) &&
                         Player.Instance.GetPath(point.To3DWorld(), true).Length <= 3)

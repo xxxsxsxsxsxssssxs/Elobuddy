@@ -2,6 +2,7 @@
 using EloBuddy;
 using Sexsimiko7AIO.Yasuo.EvadePlus.SkillshotTypes;
 using Sexsimiko7AIO.Yasuo.EvadePlus.SkillshotTypes.SpecialTypes;
+using SpellData = Sexsimiko7AIO.Yasuo.EvadePlus.SpellData;
 
 namespace Sexsimiko7AIO.Yasuo.EvadePlus
 {

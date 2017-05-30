@@ -9,7 +9,7 @@ namespace Sexsimiko7AIO.Yasuo.EvadePlus
 {
     public static class EvadeSpellManager
     {
-        public static bool ProcessFlash(EvadePlus evade)
+        public static bool ProcessFlash(Sexsimiko7AIO.Yasuo.EvadePlus.EvadePlus evade)
         {
             var dangerValue = evade.GetDangerValue();
             var flashDangerValue = EvadeMenu.SpellMenu["flash"].Cast<Slider>().CurrentValue;
@@ -39,7 +39,7 @@ namespace Sexsimiko7AIO.Yasuo.EvadePlus
             return SpellSlot.Unknown;
         }
 
-        public static Vector2 GetBlinkCastPos(EvadePlus evade, Vector2 center, float maxRange)
+        public static Vector2 GetBlinkCastPos(Sexsimiko7AIO.Yasuo.EvadePlus.EvadePlus evade, Vector2 center, float maxRange)
         {
             var polygons = evade.ClippedPolygons.Where(p => p.IsInside(center)).ToArray();
             var segments = new List<Vector2[]>();
@@ -104,7 +104,7 @@ namespace Sexsimiko7AIO.Yasuo.EvadePlus
                 for (var i = 0; i < count; i++)
                 {
                     var point = segment[0].Extend(segment[1], i*step);
-                    if (!point.IsWall())
+                    if (!Utils.IsWall(point))
                     {
                         points.Add(point);
                     }

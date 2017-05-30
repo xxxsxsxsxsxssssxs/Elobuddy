@@ -1,9 +1,7 @@
 ﻿using System.Drawing;
 using EloBuddy;
-using Sexsimiko7AIO.Yasuo.EvadePlus;
-using Sexsimiko7AIO.Yasuo.EvadePlus.SkillshotTypes;
 
-namespace EvadePlus.SkillshotTypes.SpecialTypes
+namespace Sexsimiko7AIO.Yasuo.EvadePlus.SkillshotTypes.SpecialTypes
 {
     public class YasuoQ : LinearMissileSkillshot
     {

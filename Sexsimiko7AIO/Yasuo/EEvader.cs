@@ -3,14 +3,13 @@ using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
-using SharpDX;
 using Sexsimiko7AIO.Yasuo.EvadePlus;
-using Sexsimiko7AIO.Yasuo.EvadePlus.SkillshotTypes;
+using SharpDX;
 using Color = System.Drawing.Color;
 
 namespace Sexsimiko7AIO.Yasuo
 {
-    static class EEvader
+    class EEvader
     {
         public static int WallCastT;
         public static Vector2 YasuoWallCastedPos;
@@ -38,8 +37,8 @@ namespace Sexsimiko7AIO.Yasuo
         private static void GameObject_OnCreate(GameObject sender, EventArgs args)
         {
             if (System.Text.RegularExpressions.Regex.IsMatch(
-                sender.Name, "_w_windwall.\\.troy",
-                System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                        sender.Name, "_w_windwall.\\.troy",
+                        System.Text.RegularExpressions.RegexOptions.IgnoreCase))
             {
                 Wall = sender;
             }
@@ -73,8 +72,7 @@ namespace Sexsimiko7AIO.Yasuo
             }
             if (Wall != null && YasuoWallCastedPos.IsValid() && WallPolygon != null)
             {
-                foreach (var activeSkillshot in EvadePlus.Program.Evade.SkillshotDetector.ActiveSkillshots
-                    .Where(EvadeMenu.IsSkillshotW))
+                foreach (var activeSkillshot in EvadePlus.Program.Evade.SkillshotDetector.ActiveSkillshots.Where(EvadeMenu.IsSkillshotW))
                 {
                     if (WallPolygon.IsInside(activeSkillshot.GetPosition()))
                     {
@@ -87,12 +85,9 @@ namespace Sexsimiko7AIO.Yasuo
 
             if (EvadePlus.Program.Evade.IsHeroInDanger(Player.Instance))
             {
-                if (YasuoConfig.EvadeW.CurrentValue &&
-                    Player.GetSpell(SpellSlot.W).State == SpellState.Ready)
+                if (Yasuo.FleeMenu["Evade.W"].Cast<CheckBox>().CurrentValue && Player.GetSpell(SpellSlot.W).State == SpellState.Ready)
                 {
-                    foreach (var activeSkillshot in EvadePlus.Program.Evade.SkillshotDetector.ActiveSkillshots.Where(
-                        a => EvadeMenu.IsSkillshotW(a) && Environment.TickCount - a.TimeDetected >=
-                             YasuoConfig.EvadeWDelay.CurrentValue))
+                    foreach (var activeSkillshot in EvadePlus.Program.Evade.SkillshotDetector.ActiveSkillshots.Where(a => EvadeMenu.IsSkillshotW(a) && Environment.TickCount - a.TimeDetected >= Yasuo.FleeMenu["Evade.WDelay"].Cast<Slider>().CurrentValue))
                     {
                         if (activeSkillshot.ToPolygon().IsInside(Player.Instance))
                         {
@@ -107,24 +102,22 @@ namespace Sexsimiko7AIO.Yasuo
 
                 var poly = EvadePlus.Program.Evade.CustomPoly();
 
-                if (YasuoConfig.EvadeE.CurrentValue &&
-                    Player.GetSpell(SpellSlot.E).State == SpellState.Ready)
+                if (Yasuo.FleeMenu["Evade.E"].Cast<CheckBox>().CurrentValue && Player.GetSpell(SpellSlot.E).State == SpellState.Ready)
                 {
                     foreach (
                         var source in
-                        EntityManager.MinionsAndMonsters.EnemyMinions.Where(
-                            a => a.Team != Player.Instance.Team && a.Distance(Player.Instance) < 475 && a.CanDash()))
+                            EntityManager.MinionsAndMonsters.EnemyMinions.Where(
+                                a => a.Team != Player.Instance.Team && a.Distance(Player.Instance) < 475 && a.CanDash()))
                     {
-                        if (source.GetDashPos().IsUnderTurret()) continue;
+                        if(source.GetDashPos().IsUnderTower()) continue;
                         if (EvadePlus.Program.Evade.IsPointSafe(poly, source.GetDashPos().To2D()))
                         {
                             int count = 0;
                             for (int i = 0; i < 10; i += 47)
                             {
-                                if (!EvadePlus.Program.Evade.IsPointSafe(poly,
-                                    Player.Instance.Position.Extend(source.GetDashPos(), i)))
+                                if(!EvadePlus.Program.Evade.IsPointSafe(poly, Player.Instance.Position.Extend(source.GetDashPos(), i)))
                                 {
-                                    count++;
+                                    count ++;
                                 }
                             }
                             if (count > 3) continue;
@@ -134,19 +127,18 @@ namespace Sexsimiko7AIO.Yasuo
                     }
                     foreach (
                         var source in
-                        EntityManager.Heroes.Enemies.Where(
-                            a => a.IsEnemy && a.Distance(Player.Instance) < 475 && a.CanDash()))
+                            EntityManager.Heroes.Enemies.Where(
+                                a => a.IsEnemy && a.Distance(Player.Instance) < 475 && a.CanDash()))
                     {
-                        if (source.GetDashPos().IsUnderTurret()) continue;
+                        if (source.GetDashPos().IsUnderTower()) continue;
                         if (EvadePlus.Program.Evade.IsPointSafe(poly, source.GetDashPos().To2D()))
                         {
                             int count = 0;
                             for (int i = 0; i < 10; i += 47)
                             {
-                                if (!EvadePlus.Program.Evade.IsPointSafe(poly,
-                                    Player.Instance.Position.Extend(source.GetDashPos(), i)))
+                                if(!EvadePlus.Program.Evade.IsPointSafe(poly, Player.Instance.Position.Extend(source.GetDashPos(), i)))
                                 {
-                                    count++;
+                                    count ++;
                                 }
                             }
                             if (count > 3) continue;
@@ -156,16 +148,6 @@ namespace Sexsimiko7AIO.Yasuo
                     }
                 }
             }
-        }
-
-        public static Vector3 GetDashPos(this Obj_AI_Base unit)
-        {
-            return Player.Instance.Position.Extend(Prediction.Position.PredictUnitPosition(unit, 250), 475).To3D();
-        }
-
-        public static bool CanDash(this Obj_AI_Base unit)
-        {
-            return !unit.HasBuff("YasuoDashWrapper");
         }
     }
 }

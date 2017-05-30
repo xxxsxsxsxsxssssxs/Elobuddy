@@ -29,7 +29,8 @@ namespace Sexsimiko7AIO.Lucian
             SafeEEnabled = comboMenu.Add("SafeEEnabled", new CheckBox("Enable E-To-Max-Attack-Range"));
             EAntiMele = comboMenu.Add("EAntiMele", new CheckBox("Enable Anti-Melee E"));
             RInCombo = comboMenu.Add("RInCombo", new CheckBox("Use R in Combo"));
-
+            RInComboPercentHP = comboMenu.Add("RInComboPercentHP", new Slider("Use R on Enemy %HP", 35, 1));
+            RInComboDist = comboMenu.Add("RInComboDist", new Slider("Use R Max Range", 1000, 100, 1200));
 
 
             Obj_AI_Base.OnLevelUp += Obj_AI_Base_OnLevelUp;
