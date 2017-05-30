@@ -93,7 +93,7 @@ namespace Sexsimiko7AIO.Lucian
 
             var laneclearMenu = main.AddSubMenu("++ Lane Clear");
             SpellFarmEnabled = laneclearMenu.Add("SpellFarmEnabled",
-                new KeyBind("Enable Spell Farming", false, KeyBind.BindTypes.PressToggle, 4));
+                new KeyBind("Enable Spell Farming", false, KeyBind.BindTypes.PressToggle, 'M'));
             QSpellFarm = laneclearMenu.Add("QSpellFarm", new CheckBox("Use Q to Farm"));
             MinimumMinionsToQ = laneclearMenu.Add("MinimumMinionsToQ", new Slider("Minimum Minions to Q", 4, 1, 8));
             QFarmMana = laneclearMenu.Add("QFarmMana", new Slider("Q Farm Min Mana %{0}", 50));
@@ -140,11 +140,11 @@ namespace Sexsimiko7AIO.Lucian
                     Orbwalker.ResetAutoAttack();
                     return;
                 }
-                if (QInCombo.CurrentValue && Q.Cast(TargetSelector.GetTarget(Q.Range, DamageType.Physical)))
+                if (QInCombo.CurrentValue && Q.Cast((Obj_AI_Base)args.Target))
                 {
                     return;
                 }
-                if (WInCombo.CurrentValue && W.Cast(TargetSelector.GetTarget(W.Range, DamageType.Physical)))
+                if (WInCombo.CurrentValue && W.Cast((Obj_AI_Base) args.Target))
                 {
                     return;
                 }
@@ -186,8 +186,8 @@ namespace Sexsimiko7AIO.Lucian
                     Orbwalker.ResetAutoAttack();
                     return;
                 }
-                if (QInJGClear.CurrentValue && Hero.ManaPercent > QJGMana.CurrentValue && args.Target.IsValid && Q.Cast(args.Target as Obj_AI_Base)) return;
-                if (WInJGClear.CurrentValue && Hero.ManaPercent > WJGMana.CurrentValue && args.Target.IsValid && W.Cast(args.Target as Obj_AI_Base)) return;
+                if (QInJGClear.CurrentValue && Hero.ManaPercent > QJGMana.CurrentValue && args.Target.IsValid && Q.Cast((Obj_AI_Base) args.Target)) return;
+                if (WInJGClear.CurrentValue && Hero.ManaPercent > WJGMana.CurrentValue && args.Target.IsValid && W.Cast((Obj_AI_Base) args.Target)) return;
             }
         }
 
@@ -240,8 +240,23 @@ namespace Sexsimiko7AIO.Lucian
                     if (CastExtendedQ()) return;
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
+            {
                 if (ExtendedQHarassCombo.CurrentValue && Hero.ManaPercent > ExtendedQHarassComboMana.CurrentValue)
-                    if (CastExtendedQ()) return;
+                {
+                    if (CastExtendedQ())
+                    {
+                        return;
+                    }
+                }
+                var target = TargetSelector.GetTarget(W.Range, DamageType.Physical);
+
+                if (target == null) return;
+
+                if (WInCombo.CurrentValue && W.Cast(target))
+                {
+                    return;
+                }
+            }
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
                 if (!Hero.HasBuff("lucianr"))
