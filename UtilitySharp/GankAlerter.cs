@@ -42,7 +42,7 @@ namespace UtilitySharp
                 if (obj != null && Enable.CurrentValue && menu["draw" + obj.ChampionName].Cast<CheckBox>().CurrentValue &&
                     obj.IsValidTarget(Value.CurrentValue) && Player.Instance.CountAllyChampionsInRange(Value.CurrentValue) < 2 && Player.Instance.Distance(obj) > Value.CurrentValue / 2)
                 {
-                    Drawing.DrawLine(Player.Instance.Position.WorldToScreen(), obj.Position.WorldToScreen(), 10, Color.Azure);
+                    Drawing.DrawLine(Player.Instance.Position.WorldToScreen(), obj.Position.WorldToScreen(), 5, Color.Azure);
                     //Drawing.DrawText(Player.Instance.Position.WorldToScreen().Extend(obj, 100), Color.Red, string.Format("WARNING {0} incoming !", obj.ChampionName), 65);
                 }
             }
