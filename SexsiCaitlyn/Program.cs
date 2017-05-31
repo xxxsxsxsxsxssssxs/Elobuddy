@@ -38,7 +38,7 @@ namespace SexsiCaitlyn
 
             LastTrapTime = Environment.TickCount;
 
-            var CaitlynMenu = MainMenu.AddMenu("S7AIO Caitlyn", "mikocaitlyn");
+            var CaitlynMenu = MainMenu.AddMenu("SexsiCaitlyn", "mikocaitlyn");
 
             var comboMenu = CaitlynMenu.AddSubMenu("++ Combo");
             QInCombo = comboMenu.Add("QInCombo", new CheckBox("Use Q in Combo"));

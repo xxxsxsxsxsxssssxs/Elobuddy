@@ -64,7 +64,7 @@ namespace SexsiLucian
             E = new Spell.Skillshot(SpellSlot.E, 425, SkillShotType.Linear, 250, 1000, 425);
             R = new Spell.Skillshot(SpellSlot.R, 1200, SkillShotType.Linear, 50, 2800, 110);
 
-            var main = MainMenu.AddMenu("S7AIO Lucian", "mikolucian");
+            var main = MainMenu.AddMenu("SexsiLucian", "mikolucian");
 
             var comboMenu = main.AddSubMenu("++ Combo Menu");
             QInCombo = comboMenu.Add("QInCombo", new CheckBox("Use Q in Combo"));
